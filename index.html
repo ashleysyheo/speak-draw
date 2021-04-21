@@ -1,0 +1,29 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.3.0/lib/p5.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+        <script src="sketch.js"></script>
+        <script src="categories.js"></script>
+        <title>Speak, Draw!</title>
+    </head>
+    <body>
+        <main id="main">
+            <div id="speak-draw">
+                <div class="speak-draw--texts">
+                    <p id="speak"></p>
+                    <!-- <p id="speech-result"></p> -->
+                </div>
+            </div>
+            <button id="button-draw">draw</button>
+            <button id="button-save">save</button>
+            <button id="button-cancel" class="dark-button">cancel</button>
+        </main>
+    </body>
+</html> 

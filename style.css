@@ -1,0 +1,135 @@
+@font-face {
+    font-family: 'hand1';
+    src: url('./font/hand-1.otf');
+}
+
+@font-face {
+    font-family: 'hand2';
+    src: url('./font/hand-2.otf');
+}
+
+@font-face {
+    font-family: 'hand3';
+    src: url('./font/hand-3.otf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    box-sizing: border-box;
+    font-family: 'hand2';
+    font-size: 1.8rem;
+    background-color: whitesmoke;
+    color: black;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+canvas {
+    background-color: white;
+    touch-action: none;
+    user-select: none;
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+}
+
+button {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    margin-bottom: 7rem;
+    font-family: 'hand2';
+    font-size: 7rem;
+    background-color: transparent;
+    color: inherit;
+    border: none;
+    cursor: pointer;
+    z-index: 9999;
+    transition: all .3s ease-in-out;
+}
+
+button:focus {
+    outline: none;
+}
+
+#button-draw {
+    display: block;
+}
+
+#button-save, #button-cancel {
+    display: none;
+}
+
+#button-cancel {
+    margin-bottom: 4rem;
+    font-size: 3.5rem;
+    color: gray;
+}
+
+#button-cancel:hover {
+    color: #1f1f1f;
+}
+
+.dark-button:hover {
+    color: #e3e3e3 !important;
+}
+
+#speak-draw {
+    opacity: 0;
+    /* display: block; */
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, .5);
+    z-index: 99;
+    pointer-events: none;
+}
+
+.speak-draw--texts {
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#speak-draw p {
+    font-size: 6rem;
+    text-align: center;
+}
+
+#speak {
+    margin-bottom: 7rem;
+}
+
+#write-input {
+    text-align: center;
+    color: inherit;
+    pointer-events: all;
+    font-size: 6rem;
+    font-family: 'hand2';
+    width: 45vw;
+    border: none;
+    background-color: transparent;
+}
+
+#write-input:focus {
+    outline: none;
+}
+
+#write-input::placeholder {
+    color: inherit;
+    opacity: 1;
+}
