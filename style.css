@@ -38,14 +38,13 @@ main {
 }
 
 canvas {
-    background-color: white;
     touch-action: none;
     user-select: none;
     -webkit-transform: translate(0px, 0px);
     transform: translate(0px, 0px);
 }
 
-button {
+#button-draw, #button-save, #button-cancel {
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
@@ -93,7 +92,7 @@ button:focus {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, 0.1);
     z-index: 99;
     pointer-events: none;
 }
@@ -123,6 +122,7 @@ button:focus {
     width: 45vw;
     border: none;
     background-color: transparent;
+    cursor: move;
 }
 
 #write-input:focus {
@@ -132,4 +132,96 @@ button:focus {
 #write-input::placeholder {
     color: inherit;
     opacity: 1;
+}
+
+#button-about {
+    position: fixed;
+    color: inherit;
+    top: 3rem;
+    right: 4rem;
+    text-align: center;
+    font-family: 'hand3';
+    font-size: 5.8rem;
+    z-index: 99999999;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.about-container {
+    position: absolute;
+    display: none;
+    right: 2rem;
+    z-index: 99999;
+    width: 45rem;
+    height: 100vh;
+}
+
+#about {
+    padding: 2rem;
+    padding-top: 3.5rem;
+    height: 46vh;
+    font-size: 2.8rem;
+}
+
+#title {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+}
+
+.about-text {
+    margin-bottom: 1.5rem;
+    font-size: 3rem;
+}
+
+.about-text a {
+    color: #ffbb00;
+}
+
+.margin-top {
+    margin-top: 10rem;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+#save {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#save:hover {
+    color: #ffbb00;
+}
+
+#user-history {
+    position: absolute;
+    bottom: 0;
+    padding: 2rem;
+    padding-top: 0;
+    width: 45rem;
+    height: 46.5vh;
+    overflow: scroll;    
+}
+
+.history-title {
+    /* position: fixed; */
+    padding: 2rem;
+    font-size: 3.8rem;
+    margin-bottom: 2rem;
+}
+
+.history {
+    margin-bottom: 2rem;
+}
+
+.message {
+    font-size: 3.5rem;
+}
+
+.typeTime {
+    font-size: 2.4rem;
+    color: inherit;
 }

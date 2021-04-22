@@ -24,6 +24,31 @@
             <button id="button-draw">draw</button>
             <button id="button-save">save</button>
             <button id="button-cancel" class="dark-button">cancel</button>
+            <button id="button-about" onclick="showAbout(this)">?</button>
+
+            <div class="about-container">
+                <div id="about">
+                    <h4 id="title">Speak, Draw!</h4>
+                    <p class="about-text desc">
+                        Speak, Draw! is a collaborative canvas where you can draw along with anyone on the web by speaking. 
+                        It utilises <a href="https://p5js.org/" target="_blank">p5.js</a> and Web Speech API, and takes drawings from 
+                        <a href="https://quickdraw.withgoogle.com/data" target="_blank">Quick, Draw!</a> dataset. 
+                    </p>
+                    <p class="about-text instruct">
+                        You can draw by clicking the draw button in the middle and saying what you want to draw!</span>
+                    </p>
+
+                    <div class="footer">
+                        <p id="by">by ashley heo</p>
+                        <div id="save" onclick="downloadCanvas()">dowload canvas</div>
+                    </div>
+                </div>
+                <h4 class="history-title">History</h4>
+                <div id="user-history">
+                    
+                </div>
+            </div>
+
         </main>
     </body>
 </html> 

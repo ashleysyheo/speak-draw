@@ -31,11 +31,9 @@ function dragMoveListener (event) {
 
 window.dragMoveListener = dragMoveListener;
 
-let url;
-let database;
+let url, databse;
 let drawButton, saveButton, cancelButton;
-let speak;
-let result;
+let speak, result, userHistory;
 let today;
 let drawingSaves = [];
 let randomStrokes = [];
@@ -74,10 +72,9 @@ let randomWritingPosX, randomWritingPosY;
 let xPos, yPos;
 let xPositions = [];
 let yPositions = [];
-
 let recognition;
-
 let hand1, hand2, hand3;
+let aboutDisplay = false;
 
 function preload() {
     hand1 = loadFont('font/hand-1.otf');
@@ -129,16 +126,16 @@ function setup() {
 
     drawButton = document.getElementById('button-draw');
     drawButton.onclick = newDrawing;
-    // drawButton.onmouseenter = getPos;
 
     saveButton = document.getElementById('button-save');
-    saveButton.onclick = save;
-    // saveButton.onclick = getPos;
+    saveButton.onclick = saveDrawing;
 
     cancelButton = document.getElementById('button-cancel');
     cancelButton.onclick = cancel;
 
     speak = document.getElementById('speak-draw');
+
+    userHistory = document.getElementById('user-history');
 
     // check browser
     chromeBrowser = checkBrowser();
@@ -177,16 +174,18 @@ function setup() {
                 showResult(result.value);
                 result.value = '';
             }
-        })
+        });
     }
 
     let hr = (new Date()).getHours();
     if (hr < 6 || hr > 18) {
-        document.querySelector('canvas').style.backgroundColor = 'black';
+        background(0, 0, 0);
         document.body.style.color = 'white';
         document.body.style.backgroundColor = '#171717';
         speak.style.backgroundColor = 'rgba(255, 255, 255, .1)';
         cancelButton.classList.add('dark-button');
+    } else {
+        background(255, 255, 255);
     }
 }
 
@@ -205,6 +204,8 @@ const newDrawing = e => {
     saveButton.style.display = 'block';
     cancelButton.style.display = 'block';
     speak.style.opacity = 1;
+    speak.style.pointerEvents = 'auto';
+    result.style.cursor = 'auto';
 }
 
 const getURL = (keyword) => {
@@ -255,7 +256,6 @@ const showResult = (event) => {
         if (valueWords.length !== 0) {
             messages.push(valueWords[0]);
             url = getURL(valueWords[0]);
-            
         }
     }
 
@@ -289,7 +289,7 @@ function draw() {
             yPoints.push(y);
         }
 
-        stroke(randomColor[0], randomColor[1], randomColor[2]);
+        stroke(randomColor);
         strokeWeight(randomStroke);
 
         if (prevx !== undefined) {
@@ -315,7 +315,7 @@ function draw() {
 
             if (strokeIndex === drawing.length) {
                 drawingSaves.push(currDrawing);
-                randomStrokeColors.push([randomColor[0], randomColor[1], randomColor[2]]);
+                randomStrokeColors.push(randomColor);
                 randomStrokes.push(randomStroke);
 
                 drawing = undefined;
@@ -406,6 +406,8 @@ const cancel = () => {
     saveButton.style.display = 'none';
     cancelButton.style.display = 'none';
     speak.style.opacity = 0;
+    speak.style.pointerEvents = 'none';
+    result.style.cursor = 'move';
 
     if (chromeBrowser) {
         recognition.stop();
@@ -427,11 +429,13 @@ const cancel = () => {
     yPositions = [];
 }
 
-const save = () => {
+const saveDrawing = () => {
     drawButton.style.display = 'block';
     saveButton.style.display = 'none';
     cancelButton.style.display = 'none';
     speak.style.opacity = 0;
+    speak.style.pointerEvents = 'none';
+    result.style.cursor = 'move';
 
     if (chromeBrowser) {
         recognition.stop();
@@ -485,11 +489,10 @@ const loadDrawings = (data) => {
             text(data.message, data.info.position[0], data.info.position[1]);
         } else {
             let loadedDrawing = data.info.drawing;
-            let color = data.info.stroke_color;
 
             for (let path of loadedDrawing) {
                 noFill();
-                stroke(color[0], color[1], color[2]);
+                stroke(data.info.stroke_color);
                 strokeWeight(data.info.stroke_weight);
                 beginShape();
                 for (let i=0; i<path[0].length; i++) {
@@ -504,13 +507,32 @@ const loadDrawings = (data) => {
     }
 }
 
+const loadHistory = data => {
+    let history = document.createElement('div');
+    history.className = 'history';
+    userHistory.appendChild(history);
+
+    let message = document.createElement('p');
+    history.appendChild(message);
+    message.className = 'message';
+    message.innerHTML = data.message;
+    data.type === 'writing' ? message.style.color = data.info.fill_color : message.style.color = data.info.stroke_color;
+
+    let typeTime = document.createElement('p');
+    history.appendChild(typeTime);
+    typeTime.className = 'typeTime';
+    typeTime.innerHTML = `${data.type} ${data.time[0]} ${data.time[1]}`;
+}
+
 const gotData = (data) => {
     let drawings = data.val();
     let keys = Object.keys(drawings);
 
     for (let i=0; i<keys.length;i++) {
         let key = keys[i];
-        loadDrawings(drawings[key])
+        let reverseKey = keys[keys.length-i-1];
+        loadDrawings(drawings[key]);
+        loadHistory(drawings[reverseKey]);
     }
 }
 
@@ -528,7 +550,11 @@ const getRandomStroke = () => {
 }
 
 const getRandomColor = () => {
-    let color = [1,2,3].map(x=>Math.random()*256|0);
+    let h = getRndInteger(0, 358); 
+    let s = getRndInteger(33, 100); 
+    let l = getRndInteger(33, 78); 
+
+    let color = `hsl(${h}, ${s}%, ${l}%)`;
     return color;
 }
 
@@ -564,3 +590,41 @@ const getTimeDifference = (a, b) => {
 const getRndInteger = (min, max) => {
     return Math.floor(Math.random() * (max - min) ) + min;
 }
+
+const showAbout = self => {
+    let about = document.querySelector('.about-container');
+    let title = document.querySelector('#title');
+    let description = document.querySelector('.desc');
+    let instruction = document.querySelector('.instruct');
+
+    if (!chromeBrowser) title.innerHTML = 'Write, Draw!';
+
+
+    if (!chromeBrowser) {
+        title.innerHTML = 'Write, Draw!';
+        description.innerHTML = `
+        Write, Draw! is a collaborative canvas where you can draw along with anyone on the web by writing. 
+        It utilises <a href="https://p5js.org/" target="_blank">p5.js</a> and takes drawings from the
+        <a href="https://quickdraw.withgoogle.com/data" target="_blank">Quick, Draw!</a> dataset. 
+        `;
+
+        instruction.innerHTML = `
+            You can draw by clicking the draw button in the middle and writing what you want to draw! +press ENTER</span>
+        `
+    }
+
+
+    if (aboutDisplay === false) {
+        self.innerHTML = 'x';
+        aboutDisplay = true;
+        about.style.display = 'block';
+    } else {
+        self.innerHTML = '?';
+        aboutDisplay = false;
+        about.style.display = 'none';
+    }
+}
+
+// const downloadCanvas = () => {
+//     saveCanvas('Speak, Draw!', 'jpg');
+// }
