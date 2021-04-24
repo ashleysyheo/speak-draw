@@ -237,7 +237,15 @@ button:focus {
     z-index: 9999;
 }
 
+.image-container {
+    display: none;
+}
+
 @media (max-width: 75em) {
+    .image-container {
+        display: block;
+    }
+
     #site-name {
         display: block;
     }
