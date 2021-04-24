@@ -121,12 +121,18 @@ function setup() {
     let hr = (new Date()).getHours();
 
     if (screen.width < 1200) {
+        let canvasImage = document.createElement('img');
+        document.querySelector('main').appendChild(canvasImage);
+        canvasImage.id = 'canvas-image';
+
+
         if (hr < 6 || hr > 18) {
-            document.body.style.color = 'black';
-            document.body.style.backgroundColor = 'white';
+            document.body.style.color = 'white';
+            document.body.style.backgroundColor = 'black';
+            document.querySelector('.about-container').style.backgroundColor = 'black';
+            document.querySelector('#canvas-image').src = "images/canvas_dark.jpg";
         } else {
-            document.body.style.color = 'black';
-            document.body.style.backgroundColor = 'white';
+            document.querySelector('#canvas-image').src = "images/canvas_light.jpg";
         }
     } else {
         // desktop
@@ -625,11 +631,7 @@ const showAbout = self => {
     } 
 
     if (screen.width <= 1200) {
-        if (!chromeBrowser) {
-            instruction.innerHTML = `Open Write, Draw! on your desktop for the full experience!`;
-        } else {
-            instruction.innerHTML = `Open Speak, Draw! on your desktop for the full experience! ${screen.width}`;
-        }  
+        instruction.innerHTML = `Open Speak, Draw! on your desktop for the full experience!`;
     }  
 
 

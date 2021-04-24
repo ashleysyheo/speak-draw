@@ -35,6 +35,7 @@ body {
 main {
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 }
 
 canvas {
@@ -88,7 +89,6 @@ button:focus {
 
 #speak-draw {
     opacity: 0;
-    /* display: block; */
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -141,7 +141,7 @@ button:focus {
     right: 2rem;
     font-family: 'hand3';
     font-size: 5.8rem;
-    z-index: 99999999;
+    z-index: 99999999999;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -223,9 +223,18 @@ button:focus {
     color: inherit;
 }
 
-#site-name {
-    display: none;
+.site-name-container {
     position: fixed;
+    display: none;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+#site-name {
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
     bottom: 0;
@@ -234,34 +243,28 @@ button:focus {
     font-size: 7rem;
     color: inherit;
     cursor: pointer;
-    z-index: 9999;
 }
 
-.image-container img{
+#canvas-image{
     display: none;
     width: 6400px;
 }
 
 @media (max-width: 75em) {
-    .image-container img {
+    #canvas-image {
         display: block;
     }
 
-    #site-name {
+    .site-name-container {
         display: block;
-    }
-
-    .about-container {
-        height: auto;
     }
 
     #button-about {
-        right: 2rem;
+        /* right: 9rem; */
     }
     
     #about {
         height: auto;
-        background-color: #ffbb00;
     }
 
     #user-history {
@@ -276,9 +279,15 @@ button:focus {
     }
 
     .about-container {
+        right: 0;
         left: 0;
         width: 100vw;
+        height: auto;
         background-color: white;
+    }
+
+    #user-history {
+        width: calc(100vw - 3rem);
     }
 }
 
