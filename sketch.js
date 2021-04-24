@@ -537,6 +537,7 @@ const gotData = (data) => {
 }
 
 const err = (err) => {
+    alert(err);
     console.log(err);
 }
 
@@ -551,7 +552,7 @@ const getRandomStroke = () => {
 
 const getRandomColor = () => {
     let h = getRndInteger(0, 358); 
-    let s = getRndInteger(33, 100); 
+    let s = getRndInteger(75, 100); 
     let l = getRndInteger(33, 78); 
 
     let color = `hsl(${h}, ${s}%, ${l}%)`;
@@ -625,6 +626,6 @@ const showAbout = self => {
     }
 }
 
-// const downloadCanvas = () => {
-//     saveCanvas('Speak, Draw!', 'jpg');
-// }
+const downloadCanvas = () => {
+    saveCanvas('Speak, Draw!', 'jpg');
+}
