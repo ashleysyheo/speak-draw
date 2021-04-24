@@ -29,12 +29,12 @@ body {
     font-size: 1.8rem;
     background-color: whitesmoke;
     color: black;
+    cursor: default;
 }
 
 main {
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
 }
 
 canvas {
@@ -138,8 +138,7 @@ button:focus {
     position: fixed;
     color: inherit;
     top: 3rem;
-    right: 4rem;
-    text-align: center;
+    right: 2rem;
     font-family: 'hand3';
     font-size: 5.8rem;
     z-index: 99999999;
@@ -160,8 +159,8 @@ button:focus {
 #about {
     padding: 2rem;
     padding-top: 3.5rem;
-    height: 46vh;
     font-size: 2.8rem;
+    height: 53vh;
 }
 
 #title {
@@ -185,14 +184,15 @@ button:focus {
 .footer {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 2.5rem;
 }
 
-#save {
+#save-canvas {
     text-decoration: underline;
     cursor: pointer;
 }
 
-#save:hover {
+#save-canvas:hover {
     color: #ffbb00;
 }
 
@@ -202,15 +202,12 @@ button:focus {
     padding: 2rem;
     padding-top: 0;
     width: 45rem;
-    height: 46.5vh;
+    height: 47vh;
     overflow: scroll;    
 }
 
 .history-title {
-    /* position: fixed; */
-    padding: 2rem;
     font-size: 3.8rem;
-    margin-bottom: 2rem;
 }
 
 .history {
@@ -224,4 +221,60 @@ button:focus {
 .typeTime {
     font-size: 2.4rem;
     color: inherit;
+}
+
+#site-name {
+    display: none;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    padding-bottom: 7rem;
+    font-family: 'hand2';
+    font-size: 7rem;
+    color: inherit;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+@media (max-width: 75em) {
+    #site-name {
+        display: block;
+    }
+
+    .about-container {
+        height: auto;
+    }
+
+    #button-about {
+        right: 2rem;
+    }
+    
+    #about {
+        height: auto;
+        background-color: #ffbb00;
+    }
+
+    #user-history {
+        position: static;
+        top: 0;
+        height: auto;
+        overflow: visible;
+    }
+
+    #button-draw, #save-canvas {
+        display: none;
+    }
+
+    .about-container {
+        left: 0;
+        width: 100vw;
+        background-color: white;
+    }
+}
+
+@media (max-width: 37.5em) {
+    #site-name {
+        font-size: 4rem;
+    }
 }

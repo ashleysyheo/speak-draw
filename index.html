@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.3.0/lib/p5.js"></script>
+        <script src="./p5.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
@@ -24,6 +24,7 @@
             <button id="button-draw">draw</button>
             <button id="button-save">save</button>
             <button id="button-cancel" class="dark-button">cancel</button>
+            <h4 id="site-name">Speak, Draw</h4>
             <button id="button-about" onclick="showAbout(this)">?</button>
 
             <div class="about-container">
@@ -35,18 +36,21 @@
                         <a href="https://quickdraw.withgoogle.com/data" target="_blank">Quick, Draw!</a> dataset. 
                     </p>
                     <p class="about-text instruct">
-                        You can draw by clicking the draw button in the middle and saying what you want to draw!</span>
+                        You can draw by clicking the draw button in the middle and saying what you want to draw!
                     </p>
 
                     <div class="footer">
                         <p id="by">by ashley heo</p>
                         <div id="save-canvas" onclick="downloadCanvas()">dowload canvas</div>
                     </div>
+                    <h4 class="history-title">History</h4>
                 </div>
-                <h4 class="history-title">History</h4>
                 <div id="user-history">
                     
                 </div>
+            </div>
+            <div class="image-container">
+                <img src="images/canvas_light.jpg" class="draggable">
             </div>
 
         </main>

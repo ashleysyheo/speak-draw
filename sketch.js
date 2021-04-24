@@ -95,13 +95,7 @@ window.onload = () => {
 };
 
 function setup() {
-    let canvas = createCanvas(6400, 4000);
-    canvas.parent('main');
-    document.querySelector('canvas').classList.add('draggable');
-
-    let a = document.querySelector('canvas')
-    a.onmousemove = getPos;
-
+    console.log(screen.width);
     // firebase configuration 
     let firebaseConfig = {
         apiKey: "AIzaSyBzwVo_VCGoIQ0JD0JPC3QzOTnoTeLpzes",
@@ -122,70 +116,89 @@ function setup() {
     let ref = database.ref('userDrawings');
     ref.once('value', gotData, err);
 
-    today = getTime();
-
-    drawButton = document.getElementById('button-draw');
-    drawButton.onclick = newDrawing;
-
-    saveButton = document.getElementById('button-save');
-    saveButton.onclick = saveDrawings;
-
-    cancelButton = document.getElementById('button-cancel');
-    cancelButton.onclick = cancel;
-
-    speak = document.getElementById('speak-draw');
-
     userHistory = document.getElementById('user-history');
 
-    // check browser
-    chromeBrowser = checkBrowser();
-
-    let speakContainer = document.querySelector('.speak-draw--texts');
-    let instruction = document.querySelector('#speak');
-    
-    if (chromeBrowser) {
-        // chrome
-        SpeechRecognition = webkitSpeechRecognition;
-        SpeechRecognitionEvent = webkitSpeechRecognitionEvent;
-
-        recognition = new SpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = false;
-
-        instruction.innerHTML = 'Speak!';
-        result = document.createElement('p');
-        result.id = 'speech-result';
-        result.className = 'result';
-        result.innerHTML = '. . .'
-        speakContainer.appendChild(result);
-    } else {
-        // firefox, safari, etc. 
-        instruction.innerHTML = 'Write!';
-        result = document.createElement('input');
-        result.id = 'write-input';
-        result.className = 'result';
-        result.type = 'text';
-        result.autocomplete = 'off';
-        result.placeholder = '. . .';
-        speakContainer.appendChild(result);
-
-        result.addEventListener('keyup', e => {
-            if (e.key === 'Enter') {
-                showResult(result.value);
-                result.value = '';
-            }
-        });
-    }
-
     let hr = (new Date()).getHours();
-    if (hr < 6 || hr > 18) {
-        background(0, 0, 0);
-        document.body.style.color = 'white';
-        document.body.style.backgroundColor = '#171717';
-        speak.style.backgroundColor = 'rgba(255, 255, 255, .1)';
-        cancelButton.classList.add('dark-button');
+
+    if (screen.width < 1200) {
+        if (hr < 6 || hr > 18) {
+            document.body.style.color = 'black';
+            document.body.style.backgroundColor = 'white';
+        } else {
+            document.body.style.color = 'black';
+            document.body.style.backgroundColor = 'white';
+        }
     } else {
-        background(255, 255, 255);
+        // desktop
+        let canvas = createCanvas(6400, 4000);
+        canvas.parent('main');
+        document.querySelector('canvas').classList.add('draggable');
+
+        let a = document.querySelector('canvas')
+        a.onmousemove = getPos;
+
+        today = getTime();
+
+        drawButton = document.getElementById('button-draw');
+        drawButton.onclick = newDrawing;
+
+        saveButton = document.getElementById('button-save');
+        saveButton.onclick = saveDrawing;
+
+        cancelButton = document.getElementById('button-cancel');
+        cancelButton.onclick = cancel;
+
+        speak = document.getElementById('speak-draw');
+
+        // check browser
+        chromeBrowser = checkBrowser();
+
+        let speakContainer = document.querySelector('.speak-draw--texts');
+        let instruction = document.querySelector('#speak');
+        
+        if (chromeBrowser) {
+            // chrome
+            SpeechRecognition = webkitSpeechRecognition;
+            SpeechRecognitionEvent = webkitSpeechRecognitionEvent;
+
+            recognition = new SpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = false;
+
+            instruction.innerHTML = 'Speak!';
+            result = document.createElement('p');
+            result.id = 'speech-result';
+            result.className = 'result';
+            result.innerHTML = '. . .'
+            speakContainer.appendChild(result);
+        } else {
+            // firefox, safari, etc. 
+            instruction.innerHTML = 'Write!';
+            result = document.createElement('input');
+            result.id = 'write-input';
+            result.className = 'result';
+            result.type = 'text';
+            result.autocomplete = 'off';
+            result.placeholder = '. . .';
+            speakContainer.appendChild(result);
+
+            result.addEventListener('keyup', e => {
+                if (e.key === 'Enter') {
+                    showResult(result.value);
+                    result.value = '';
+                }
+            });
+        }
+
+        if (hr < 6 || hr > 18) {
+            background(0, 0, 0);
+            document.body.style.color = 'white';
+            document.body.style.backgroundColor = '#171717';
+            speak.style.backgroundColor = 'rgba(255, 255, 255, .1)';
+            cancelButton.classList.add('dark-button');
+        } else {
+            background(255, 255, 255);
+        }
     }
 }
 
@@ -429,7 +442,7 @@ const cancel = () => {
     yPositions = [];
 }
 
-const saveDrawings = () => {
+const saveDrawing = () => {
     drawButton.style.display = 'block';
     saveButton.style.display = 'none';
     cancelButton.style.display = 'none';
@@ -598,10 +611,7 @@ const showAbout = self => {
     let description = document.querySelector('.desc');
     let instruction = document.querySelector('.instruct');
 
-    if (!chromeBrowser) title.innerHTML = 'Write, Draw!';
-
-
-    if (!chromeBrowser) {
+    if (!chromeBrowser && screen.width > 1200) {
         title.innerHTML = 'Write, Draw!';
         description.innerHTML = `
         Write, Draw! is a collaborative canvas where you can draw along with anyone on the web by writing. 
@@ -610,9 +620,17 @@ const showAbout = self => {
         `;
 
         instruction.innerHTML = `
-            You can draw by clicking the draw button in the middle and writing what you want to draw! +press ENTER</span>
+            You can draw by clicking the draw button in the middle and writing what you want to draw! +press ENTER ${screen.width}
         `
-    }
+    } 
+
+    if (screen.width <= 1200) {
+        if (!chromeBrowser) {
+            instruction.innerHTML = `Open Write, Draw! on your desktop for the full experience!`;
+        } else {
+            instruction.innerHTML = `Open Speak, Draw! on your desktop for the full experience! ${screen.width}`;
+        }  
+    }  
 
 
     if (aboutDisplay === false) {
