@@ -128,7 +128,7 @@ function setup() {
     drawButton.onclick = newDrawing;
 
     saveButton = document.getElementById('button-save');
-    saveButton.onclick = saveDrawing;
+    saveButton.onclick = saveDrawings;
 
     cancelButton = document.getElementById('button-cancel');
     cancelButton.onclick = cancel;
@@ -429,7 +429,7 @@ const cancel = () => {
     yPositions = [];
 }
 
-const saveDrawing = () => {
+const saveDrawings = () => {
     drawButton.style.display = 'block';
     saveButton.style.display = 'none';
     cancelButton.style.display = 'none';
