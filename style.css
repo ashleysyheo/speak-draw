@@ -237,12 +237,13 @@ button:focus {
     z-index: 9999;
 }
 
-.image-container {
+.image-container img{
     display: none;
+    width: 6400px;
 }
 
 @media (max-width: 75em) {
-    .image-container {
+    .image-container img {
         display: block;
     }
 
