@@ -259,10 +259,6 @@ button:focus {
         display: block;
     }
 
-    #button-about {
-        /* right: 9rem; */
-    }
-    
     #about {
         height: auto;
     }
