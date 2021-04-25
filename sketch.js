@@ -131,9 +131,9 @@ function setup() {
             document.body.style.color = 'white';
             document.body.style.backgroundColor = 'black';
             document.querySelector('.about-container').style.backgroundColor = 'black';
-            document.querySelector('#canvas-image').src = "images/canvas_dark.jpg";
+            document.querySelector('#canvas-image').src = "images/canvas_dark.png";
         } else {
-            document.querySelector('#canvas-image').src = "images/canvas_light.jpg";
+            document.querySelector('#canvas-image').src = "images/canvas_light.png";
         }
     } else {
         // desktop
@@ -201,7 +201,7 @@ function setup() {
             background(0, 0, 0);
             document.body.style.color = 'white';
             document.body.style.backgroundColor = '#171717';
-            speak.style.backgroundColor = 'rgba(255, 255, 255, .1)';
+            speak.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
             cancelButton.classList.add('dark-button');
         } else {
             background(255, 255, 255);
