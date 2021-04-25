@@ -124,7 +124,7 @@ function setup() {
         let canvasImage = document.createElement('img');
         document.querySelector('main').appendChild(canvasImage);
         canvasImage.id = 'canvas-image';
-        canvasImage.className = 'draggable';
+        // canvasImage.className = 'draggable';
 
 
         if (hr < 6 || hr > 18) {

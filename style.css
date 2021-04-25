@@ -238,7 +238,7 @@ button:focus {
     left: 50%;
     transform: translateX(-50%);
     bottom: 0;
-    padding-bottom: 7rem;
+    padding-bottom: 15rem;
     font-family: 'hand2';
     font-size: 7rem;
     color: inherit;
@@ -251,6 +251,10 @@ button:focus {
 }
 
 @media (max-width: 75em) {
+    main {
+        overflow: scroll;
+    }
+
     #canvas-image {
         display: block;
     }
