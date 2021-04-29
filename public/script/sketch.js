@@ -95,7 +95,6 @@ window.onload = () => {
 };
 
 function setup() {
-    console.log(screen.width);
     // firebase configuration 
     let firebaseConfig = {
         apiKey: "AIzaSyBzwVo_VCGoIQ0JD0JPC3QzOTnoTeLpzes",
