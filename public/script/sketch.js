@@ -123,8 +123,7 @@ function setup() {
         let canvasImage = document.createElement('img');
         document.querySelector('main').appendChild(canvasImage);
         canvasImage.id = 'canvas-image';
-        // canvasImage.className = 'draggable';
-
+        console.log('mob')
 
         if (hr < 6 || hr > 18) {
             document.body.style.color = 'white';
@@ -202,6 +201,7 @@ function setup() {
             document.body.style.backgroundColor = '#171717';
             speak.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
             cancelButton.classList.add('dark-button');
+            document.querySelector('.about-container').style.backgroundColor = 'black';
         } else {
             background(255, 255, 255);
         }
