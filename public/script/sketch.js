@@ -645,5 +645,5 @@ const showAbout = self => {
 }
 
 const downloadCanvas = () => {
-    saveCanvas('Speak, Draw!', 'jpg');
+    saveCanvas('Speak, Draw!', 'png');
 }

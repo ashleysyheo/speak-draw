@@ -223,28 +223,6 @@ button:focus {
     color: inherit;
 }
 
-.site-name-container {
-    position: fixed;
-    display: none;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9999;
-    pointer-events: none;
-}
-
-#site-name {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 0;
-    padding-bottom: 15rem;
-    font-family: 'hand2';
-    font-size: 7rem;
-    color: inherit;
-    cursor: pointer;
-}
-
 #canvas-image{
     display: none;
     width: 6400px;
@@ -256,10 +234,6 @@ button:focus {
     }
 
     #canvas-image {
-        display: block;
-    }
-
-    .site-name-container {
         display: block;
     }
 
