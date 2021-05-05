@@ -494,10 +494,11 @@ const saveDrawing = () => {
 }
 
 const loadDrawings = (data) => {
+    let me = 'Code by Ashley Heo'
     let type = data.type;
     let timeDifference = getTimeDifference(today, data.time_ms);
 
-    if (timeDifference < 30) {
+    if (timeDifference < 15 || data.message === me) {
         if (type === 'writing') {
             noStroke();
             fill(data.info.fill_color);
