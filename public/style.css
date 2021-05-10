@@ -233,6 +233,10 @@ button:focus {
         overflow: scroll;
     }
 
+    canvas {
+        display: none;
+    }
+
     #canvas-image {
         display: block;
     }
