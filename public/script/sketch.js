@@ -625,7 +625,7 @@ const showAbout = self => {
         `;
 
         instruction.innerHTML = `
-            You can draw by clicking the draw button in the middle and writing what you want to draw! +press ENTER ${screen.width}
+            You can draw by clicking the draw button in the middle and writing what you want to draw! +press ENTER
         `
     } 
 
