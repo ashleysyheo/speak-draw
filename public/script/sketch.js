@@ -498,7 +498,7 @@ const loadDrawings = (data) => {
     let type = data.type;
     let timeDifference = getTimeDifference(today, data.time_ms);
 
-    if (timeDifference < 32 || data.message === me) {
+    if (timeDifference < 50 || data.message === me) {
         if (type === 'writing') {
             noStroke();
             fill(data.info.fill_color);
